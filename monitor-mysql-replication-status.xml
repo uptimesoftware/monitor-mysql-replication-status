@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.uptimesoftware.com/erdc/erdc erdc"
+	xmlns="http://www.uptimesoftware.com/erdc/erdc"
+	xmlns:upt="http://www.uptimesoftware.com/erdc/erdc" version="4.0" target_grouping="other">
+	<class>MySQL Replication Status</class>
+	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
+	<erdc_version>1.0</erdc_version>
+	<category>Applications - Databases</category>
+	<category_related></category_related>
+	<grid_info>
+		<supported_versions>7.3</supported_versions>
+		<supported_platforms>linux</supported_platforms>
+		<upgrade_in_place>true</upgrade_in_place>
+		<requires_agent_scripts>false</requires_agent_scripts>
+	</grid_info>
+	<elements>
+		<element name="process_linux" parameter_type="input" hidden="true" data_type="string" gui_basic="1" range_type="0">
+			<control_options> size:40 </control_options>
+			<default_value>plugins/scripts/monitor-mysql-replication-status/replication_status.sh</default_value>
+			<short_description>Script Name</short_description>
+			<long_description>Name of the script to be executed by up.time </long_description>
+			<validation_rule>
+				<alphanumeric/>
+			</validation_rule>
+			<error_message>
+				<alphanumeric>required field</alphanumeric>
+			</error_message>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name='username' parameter_type='input' data_type='integer' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Database User</short_description>
+			<long_description>MySQL User with at least GRANT REPLICATION CLIENT permissions that allows connection from remote machine</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name='password' parameter_type='input' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Database Password</short_description>
+			<long_description>Password setup on the database</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<password/>
+			</gui_type>
+		</element>
+		<element name='port' parameter_type='input' data_type='integer' gui_basic='1' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value>3308</default_value>
+			<short_description>Database Port</short_description>
+			<long_description>MySQL Port</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name='second_behind_master' parameter_type='output' data_type='integer' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Seconds Behind Master</short_description>
+			<long_description>The number of seconds the Slave is behind the Master in replication</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name='slave_io_state' parameter_type='output' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Slave IO State</short_description>
+			<long_description>The current State of the IO process for the Slave</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name='slave_io_running' parameter_type='output' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Slave IO Running</short_description>
+			<long_description>The current Status of the IO process for the Slave if not running there may be an issue</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name='slave_sql_running' parameter_type='output' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Slave SQL Running</short_description>
+			<long_description>The current Status of the SQL process for the Slave if not running there may be an issue</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name='last_io_errno' parameter_type='output' data_type='integer' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Last IO Error Number</short_description>
+			<long_description>The number of the last IO error on the slave</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name='last_io_error' parameter_type='output' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Last IO Error</short_description>
+			<long_description>The last IO error on the slave</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name='last_sql_errno' parameter_type='output' data_type='integer' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Last SQL Error Number</short_description>
+			<long_description>The number of the last SQL error on the slave</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name='last_sql_error' parameter_type='output' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:40</control_options>
+			<default_value></default_value>
+			<short_description>Last SQL Error</short_description>
+			<long_description>The last SQL error on the slave</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="timer" parameter_type="output" data_type="integer" gui_basic="0" range_type="0" units="ms">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Response time</short_description>
+			<long_description>Response time in ms</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+	</elements>
+	<help>This script will return a number of variables from SHOW SLAVE STATUS to allow you to determine if replication is running</help>
+</uptime>

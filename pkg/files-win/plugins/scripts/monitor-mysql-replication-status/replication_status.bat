@@ -7,4 +7,4 @@ set PORT=%UPTIME_PORT%
 
 set UPTIMEDIR="%MIBDIRS%\.."
 
-.%UPTIMEDIR%\apache\php\php slave_status.php -h=%HOSTNAME% -P=%PORT% -d"uptime" -u%USER% -p%PASSWORD%
+%UPTIMEDIR%\apache\php\php slave_status.php -h=%HOSTNAME% -P=%PORT% -u%USER% -p%PASSWORD%

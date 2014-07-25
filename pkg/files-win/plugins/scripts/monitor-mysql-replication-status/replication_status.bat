@@ -1,0 +1,10 @@
+@ECHO OFF
+
+set HOSTNAME=%UPTIME_HOSTNAME%
+set USER=%UPTIME_USERNAME%
+set PASSWORD=%UPTIME_PASSWORD%
+set PORT=%UPTIME_PORT%
+
+set UPTIMEDIR="%MIBDIRS%\.."
+
+.%UPTIMEDIR%\apache\php\php slave_status.php -h=%HOSTNAME% -P=%PORT% -d"uptime" -u%USER% -p%PASSWORD%

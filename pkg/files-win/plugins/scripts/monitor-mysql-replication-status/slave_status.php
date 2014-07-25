@@ -55,12 +55,12 @@ $ori_output = array();
 $variables_arr = array();
 $rv = 0;
 $ok = true;
-$mysql_bin = '../../mysql/bin/mysql';
+$mysql_bin = '..\..\..\mysql\bin\mysql';
 $sql = 'show slave status\G';
-$full_cmd = "{$mysql_bin} -u{$user} -p{$pass} -P{$port} -h{$host} {$db} -e'{$sql}'";
+$full_cmd = "{$mysql_bin} -u{$user} -p{$pass} -P{$port} -h{$host} -e\"{$sql}\"";
 
 
-//print $full_cmd;
+// print $full_cmd;
 
 exec($full_cmd, $ori_output, $rv);
 
@@ -83,37 +83,25 @@ if (count($ori_output) > 20) {  // first let's make sure we got the right output
         }
 
 
-//print_r($variables_arr);
+// print_r($variables_arr);
 		
         // seconds behind master
         print "seconds_behind_master {$variables_arr['seconds_behind_master']}\n";
-        
-		// Slave IO state
-        print "Slave_IO_State {$variables_arr['Slave_IO_State']}\n";
+        	
+	// Slave IO state
+        print "Slave_IO_State {$variables_arr['slave_io_state']}\n";
 		
-        // make sure the slave IO and SQL threads are running
-        if ( $variables_arr["slave_io_running"] == "Yes" &&
-        $variables_arr["slave_sql_running"] == "Yes" ) {
-                // running, so good
-                print "slave_IO_running Yes\n";
-        }
-        else {
-                print "slave_IO_running No\n";
-                $ok = false;
-        }
+        // Slave_IO_RUnning        
+	print "Slave_IO_Running {$variables_arr['slave_io_running']}\n";
 
         // Slave_SQL_Running
-        print "Slave_SQL_Running {$variables_arr['Slave_SQL_Running']}\n";
+        print "Slave_SQL_Running {$variables_arr['slave_sql_running']}\n";
 
 		// last error
-        print "Last_IO_Errno {$variables_arr['Last_IO_Errno']}\n";
+        print "Last_IO_Errno {$variables_arr['last_io_errno']}\n";
 
 		// last error
-        print "Last_SQL_Errno {$variables_arr['Last_SQL_Errno']}\n";
-
-        if ( ! $ok ) {
-                exit(2);
-        }
+        print "Last_SQL_Errno {$variables_arr['last_sql_errno']}\n";
 
 }
 else {

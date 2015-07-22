@@ -89,19 +89,19 @@ if (count($ori_output) > 20) {  // first let's make sure we got the right output
         print "seconds_behind_master {$variables_arr['seconds_behind_master']}\n";
         	
 	// Slave IO state
-        print "Slave_IO_State {$variables_arr['slave_io_state']}\n";
+        print "slave_io_state {$variables_arr['slave_io_state']}\n";
 		
         // Slave_IO_RUnning        
-	print "Slave_IO_Running {$variables_arr['slave_io_running']}\n";
+	print "slave_io_running {$variables_arr['slave_io_running']}\n";
 
         // Slave_SQL_Running
-        print "Slave_SQL_Running {$variables_arr['slave_sql_running']}\n";
+        print "slave_sql_running {$variables_arr['slave_sql_running']}\n";
 
-		// last error
-        print "Last_IO_Errno {$variables_arr['last_io_errno']}\n";
+        // last error
+        print "last_io_errno {$variables_arr['last_io_errno']}\n";
 
-		// last error
-        print "Last_SQL_Errno {$variables_arr['last_sql_errno']}\n";
+        // last error
+        print "last_sql_errno {$variables_arr['last_sql_errno']}\n";
 
 }
 else {

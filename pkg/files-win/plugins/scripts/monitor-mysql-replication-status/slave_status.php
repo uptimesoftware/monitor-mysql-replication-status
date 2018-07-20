@@ -57,13 +57,32 @@ $rv = 0;
 $ok = true;
 $mysql_bin = '..\..\..\mysql\bin\mysql';
 $sql = 'show slave status\G';
-$full_cmd = "{$mysql_bin} -u{$user} -p{$pass} -P{$port} -h{$host} -e\"{$sql}\"";
+
+//creating a temp file to contain credentials
+$my_file = 'config.cnf';
+$my_file_path  = dirname(__FILE__) .  '/config.cnf';
+
+$handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+
+$data = "[client]\n
+user = {$user}\n
+password = {$pass}\n
+host = {$host}\n
+port= {$port}";
+fwrite($handle, $data);
+$full_cmd = "{$mysql_bin} --defaults-extra-file=./config.cnf -e\"{$sql}\"";
+//$full_cmd = "{$mysql_bin} -u{$user} -p{$pass} -P{$port} -h{$host} -e\"{$sql}\"";
 
 
 // print $full_cmd;
 
 exec($full_cmd, $ori_output, $rv);
-
+//closing the file
+fclose($handle); 
+//check if file exists
+if (is_file($my_file_path)) {
+	unlink($my_file_path); //deleting the temp file
+}
 if (count($ori_output) > 20) {  // first let's make sure we got the right output (usually about 41 lines are outputed)
         foreach ($ori_output as $line) {
                 // ignore **************..... line
